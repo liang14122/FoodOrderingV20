@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.a16004118.foodorderingv20.HttpRequest;
+import com.example.a16004118.foodorderingv20.Object.User;
 import com.example.a16004118.foodorderingv20.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,6 +24,8 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+
+import org.json.JSONObject;
 
 import java.util.concurrent.TimeUnit;
 
@@ -132,8 +136,21 @@ public class AuthActivity extends AppCompatActivity {
 
                             FirebaseUser user = task.getResult().getUser();
 
-                            startActivity(new Intent(AuthActivity.this, MainActivity.class));
-                            finish();
+                            String uid = user.getUid();
+
+                            String url = "https://16004118.000webhostapp.com/getUserByUid.php?fbId=" + uid;
+
+                            HttpRequest request = new HttpRequest(url);
+
+                            request.setOnHttpResponseListener(mHttpResponseListenerGetUserByUid);
+                            request.setMethod("GET");
+//                            request.addData("fbId",uid);
+
+                            request.execute();
+                            // Code for step 1 end
+
+//                            startActivity(new Intent(AuthActivity.this, MainActivity.class));
+//                            finish();
                             // ...
                         } else {
                             // Sign in failed, display a message and update the UI
@@ -141,9 +158,69 @@ public class AuthActivity extends AppCompatActivity {
                             Toast.makeText(AuthActivity.this, task.getException()+"" , Toast.LENGTH_SHORT).show();
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 // The verification code entered was invalid
+                                Toast.makeText(AuthActivity.this, "Please enter valid verification code", Toast.LENGTH_LONG).show();
+                                btnSendCode.setEnabled(true);
+                                btnType = 0;
                             }
                         }
                     }
                 });
     }
+
+    private HttpRequest.OnHttpResponseListener mHttpResponseListenerGetUserByUid =
+            new HttpRequest.OnHttpResponseListener() {
+                @Override
+                public void onResponse(String response) {
+
+                    // process response here
+                    try {
+                        Log.i("getUserByUid Results: ", response);
+
+                        JSONObject jsonObj = new JSONObject(response);
+
+                        if (jsonObj.has("success")){
+                            if (!jsonObj.getBoolean("success")){
+
+                                String uid = mAuth.getCurrentUser().getUid();
+
+                                String url = "https://16004118.000webhostapp.com/createUser.php?fbId=" + uid;
+
+                                HttpRequest request = new HttpRequest(url);
+
+                                request.setOnHttpResponseListener(mHttpResponseListenerCreateUser);
+                                request.setMethod("POST");
+
+                                request.execute();
+                            }
+                        } else{
+                            startActivity(new Intent(AuthActivity.this, MainActivity.class));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.d("JSON Results", "onResponse: " + e.toString());
+                    }
+                }
+            };
+
+    private HttpRequest.OnHttpResponseListener mHttpResponseListenerCreateUser =
+            new HttpRequest.OnHttpResponseListener() {
+                @Override
+                public void onResponse(String response) {
+
+                    // process response here
+                    try {
+                        Log.i("JSON Results: ", response);
+
+                        JSONObject jsonObj = new JSONObject(response);
+
+                        if (jsonObj.getBoolean("success")){
+                            startActivity(new Intent(AuthActivity.this, MainActivity.class));
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.d("JSON Results", "onResponse: " + e.toString());
+                    }
+                }
+            };
 }
