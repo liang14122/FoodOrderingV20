@@ -250,7 +250,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 double price = cursor.getDouble(3);
                 String description = cursor.getString(4);
                 boolean mostSeller = (cursor.getInt(5) == 1);
-                Menu currentMenu = new Menu(id,categoryId, foodName, price, description, mostSeller);
+                Menu currentMenu = new Menu(id,categoryId, foodName, price, description, mostSeller,"");
                 menus.add(currentMenu);
             } while (cursor.moveToNext());
         }

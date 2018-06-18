@@ -1,8 +1,5 @@
 package com.example.a16004118.foodorderingv20.Object;
 
-/**
- * Created by 16004118 on 8/11/2017.
- */
 
 public class Menu {
     private int menuId;
@@ -11,17 +8,19 @@ public class Menu {
     private double price;
     private String description;
     private boolean mostSeller;
+    private String imageURL;
 
-    public Menu(int menuId, int categoryId, String foodName, double price, String description, boolean mostSeller) {
+    public Menu(int menuId, int categoryId, String foodName, double price, String description, boolean mostSeller, String imageURL) {
         this.menuId = menuId;
         this.categoryId = categoryId;
         this.foodName = foodName;
         this.price = price;
         this.description = description;
         this.mostSeller = mostSeller;
+        this.imageURL = imageURL;
     }
 
-    public Menu() {
+    public Menu(int i, int i1, String aa, double v, String bb, String cc, boolean b) {
     }
 
     public int getMenuId() {
@@ -70,5 +69,13 @@ public class Menu {
 
     public void setMostSeller(boolean mostSeller) {
         this.mostSeller = mostSeller;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 }

@@ -2,6 +2,7 @@ package com.example.a16004118.foodorderingv20.Activity;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a16004118.foodorderingv20.HttpRequest;
@@ -31,10 +33,10 @@ import java.util.concurrent.TimeUnit;
 
 public class AuthActivity extends AppCompatActivity {
 
-    private LinearLayout llPhoneNumber, llVerificationCode;
     private EditText etPhoneNumber, etVerificationCode;
     private ProgressBar pbVerificationCode, pbPhoneNumber;
     private Button btnSendCode;
+    private TextView tvError, tvInformation;
 
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     private FirebaseAuth mAuth;
@@ -50,14 +52,14 @@ public class AuthActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        llPhoneNumber = findViewById(R.id.llPhoneNumber);
-        llVerificationCode = findViewById(R.id.llVerificationCode);
-
         etPhoneNumber = findViewById(R.id.etPhoneNumber);
         etVerificationCode = findViewById(R.id.etVerificationCode);
 
         pbVerificationCode = findViewById(R.id.pbVerificationCode);
         pbPhoneNumber = findViewById(R.id.pbPhoneNumber);
+
+        tvError = findViewById(R.id.tvError);
+        tvInformation = findViewById(R.id.tvInformation);
 
         btnSendCode = findViewById(R.id.btnSendCode);
 
@@ -66,7 +68,6 @@ public class AuthActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (btnType == 0){
 
-                    llPhoneNumber.setVisibility(View.VISIBLE);
                     pbPhoneNumber.setVisibility(View.VISIBLE);
                     etPhoneNumber.setEnabled(false);
                     btnSendCode.setEnabled(false);
@@ -118,7 +119,6 @@ public class AuthActivity extends AppCompatActivity {
                 btnType = 1;
 
                 pbPhoneNumber.setVisibility(View.INVISIBLE);
-                llVerificationCode.setVisibility(View.VISIBLE);
                 btnSendCode.setText("Verify Code");
                 btnSendCode.setEnabled(true);
             }
@@ -158,8 +158,10 @@ public class AuthActivity extends AppCompatActivity {
                             Toast.makeText(AuthActivity.this, task.getException()+"" , Toast.LENGTH_SHORT).show();
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 // The verification code entered was invalid
+
                                 Toast.makeText(AuthActivity.this, "Please enter valid verification code", Toast.LENGTH_LONG).show();
                                 btnSendCode.setEnabled(true);
+                                btnSendCode.setText("Send Verification Code");
                                 btnType = 0;
                             }
                         }
