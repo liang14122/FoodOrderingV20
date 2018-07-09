@@ -20,6 +20,7 @@ import com.example.a16004118.foodorderingv20.CurrentOrder;
 import com.example.a16004118.foodorderingv20.HttpRequest;
 import com.example.a16004118.foodorderingv20.ImageTransformation;
 import com.example.a16004118.foodorderingv20.Object.Menu;
+import com.example.a16004118.foodorderingv20.Object.Order;
 import com.example.a16004118.foodorderingv20.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,7 +32,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MenuAdapter extends ArrayAdapter {
+public class MenuAdapter extends ArrayAdapter implements View.OnClickListener{
 
     Context parent_context;
     int layout_id;
@@ -83,22 +84,7 @@ public class MenuAdapter extends ArrayAdapter {
                 .transform(ImageTransformation.getTransformation(ivFoodImg))
                 .into(ivFoodImg);
 
-        btnAddToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String urlCheckODExist = "https://16004118.000webhostapp.com/getOrderDetailByIds.php?orderId="
-                        + CurrentOrder.currentOrderId + "&menuId=" + currentMenu.getMenuId();
-
-                HttpRequest requestCheckODExist = new HttpRequest(urlCheckODExist);
-
-                requestCheckODExist.setOnHttpResponseListener(mHttpResponseListenerCheckODExist);
-                requestCheckODExist.setMethod("GET");
-
-                requestCheckODExist.execute();
-
-            }
-        });
+        btnAddToCart.setOnClickListener(this);
 
         return rowView;
     }
@@ -113,7 +99,7 @@ public class MenuAdapter extends ArrayAdapter {
 
                         JSONObject jsonObj = new JSONObject(response);
 
-                        if (jsonObj.getBoolean("success")) {
+                        if (!jsonObj.getBoolean("success")) {
 
                             //create new orderDetail record
                             String urlCreateRecord = "https://16004118.000webhostapp.com/createOrderDetail.php?orderId="
@@ -189,6 +175,10 @@ public class MenuAdapter extends ArrayAdapter {
                         if (jsonObj.getBoolean("success")){
                             //new orderDetail created successfully
                             Log.e(TAG, "createOrderDetail: Successful" );
+
+                            if(getContext() instanceof OrderActivity){
+//                                ((OrderActivity)getContext()).updateOrderUI();
+                            }
                         }else{
                             //Failed to create orderDetail
                             orderDetailFailed();
@@ -204,5 +194,19 @@ public class MenuAdapter extends ArrayAdapter {
     private void orderDetailFailed() {
         Log.e(TAG, "createOrderDetail: Failed");
         Toast.makeText(getContext(), "Failed to continue your order", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        String urlCheckODExist = "https://16004118.000webhostapp.com/getOrderDetailByIds.php?orderId="
+                + CurrentOrder.currentOrderId + "&menuId=" + currentMenu.getMenuId();
+
+        HttpRequest requestCheckODExist = new HttpRequest(urlCheckODExist);
+
+        requestCheckODExist.setOnHttpResponseListener(mHttpResponseListenerCheckODExist);
+        requestCheckODExist.setMethod("GET");
+
+        requestCheckODExist.execute();
     }
 }

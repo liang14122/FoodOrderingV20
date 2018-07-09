@@ -77,6 +77,20 @@ public class OrderActivity extends AppCompatActivity {
 
     }
 
+
+    public void updateOrderUI(int orderId){
+
+        String urlGetOrderDetail = "https://16004118.000webhostapp.com/getOrderDetailById.php?orderId=" + "";
+
+        HttpRequest requestGetOrderDetail = new HttpRequest(urlGetOrderDetail);
+
+        requestGetOrderDetail.setOnHttpResponseListener(mHttpResponseListenerGetOrderDetail);
+        requestGetOrderDetail.setMethod("GET");
+
+        requestGetOrderDetail.execute();
+
+    }
+
     private HttpRequest.OnHttpResponseListener mHttpResponseListenerGetMenu =
             new HttpRequest.OnHttpResponseListener() {
                 @Override
@@ -175,10 +189,45 @@ public class OrderActivity extends AppCompatActivity {
                 }
             };
 
+
+    private HttpRequest.OnHttpResponseListener mHttpResponseListenerGetOrderDetail =
+            new HttpRequest.OnHttpResponseListener() {
+                @Override
+                public void onResponse(String response) {
+
+                    // process response here
+                    try {
+                        Log.i("getMenu Results: ", response);
+
+                        JSONArray jsonArr = new JSONArray(response);
+
+                        if (jsonArr.length() > 0){
+                            for (int i = 0; i < jsonArr.length(); i++){
+                                JSONObject currentObj = (JSONObject) jsonArr.get(i);
+                                Menu currentMenu = new Menu(currentObj.getInt("menuId"),
+                                        currentObj.getInt("categoryId"),
+                                        currentObj.getString("foodName"),
+                                        currentObj.getDouble("price"),
+                                        currentObj.getString("description"),
+                                        (currentObj.getInt("mostSeller") == 1),
+                                        currentObj.getString("imageURL"));
+                                Log.e(TAG, "addMemu: " + currentObj.getInt("price") );
+                                alMenu.add(currentMenu);
+                            }
+                            ma.notifyDataSetChanged();
+                            Log.e(TAG, "alMostSeller Size: " + alMenu.size() );
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.d("JSON Results", "onResponse: " + e.toString());
+                    }
+                }
+            };
+
     private void orderFailed() {
         Log.e(TAG, "createOrder: Failed");
         Toast.makeText(OrderActivity.this, "Failed to start your order", Toast.LENGTH_LONG).show();
         finish();
     }
-
 }
