@@ -28,7 +28,6 @@ public class MostSelleAdapter extends ArrayAdapter{
     Context parent_context;
     int layout_id;
     ArrayList<Menu> menuList;
-    private static int targetWidth = 0;
 
     public MostSelleAdapter(Context context,
                                 int resource,
@@ -61,7 +60,7 @@ public class MostSelleAdapter extends ArrayAdapter{
         Menu currentMenu = menuList.get(position);
 
         tvFoodName.setText(currentMenu.getFoodName());
-        tvPrice.setText(currentMenu.getPrice()+"");
+        tvPrice.setText("$" + currentMenu.getPrice()+"");
         tvDescription.setText(currentMenu.getDescription());
         ivFoodImg.setImageResource(R.drawable.verification_code);
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -19,7 +20,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         btnStartOrder = findViewById(R.id.btnStartOrder);
         lvMostSeller = findViewById(R.id.lvMostSeller);
 
-        msa = new MostSelleAdapter(MainActivity.this, R.layout.menu_row, alMostSeller);
+        msa = new MostSelleAdapter(MainActivity.this, R.layout.most_seller_row, alMostSeller);
         lvMostSeller.setAdapter(msa);
 
 //        alMostSeller.add(new Menu(1, 1,"aa", 1.1, "bb", "cc", true));
@@ -58,6 +58,13 @@ public class MainActivity extends AppCompatActivity {
         request.setMethod("GET");
 
         request.execute();
+
+        btnStartOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, OrderActivity.class));
+            }
+        });
     }
 
     @Override
