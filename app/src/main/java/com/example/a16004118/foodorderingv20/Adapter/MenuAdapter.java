@@ -2,7 +2,10 @@ package com.example.a16004118.foodorderingv20.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
+import android.text.AlteredCharSequence;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +35,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MenuAdapter extends ArrayAdapter implements View.OnClickListener{
+public class MenuAdapter extends ArrayAdapter{
 
     Context parent_context;
     int layout_id;
@@ -40,6 +43,7 @@ public class MenuAdapter extends ArrayAdapter implements View.OnClickListener{
 
     private static Menu currentMenu;
     private static final String TAG = "MenuAdapter";
+    private int menuPosition = 0;
 
     public MenuAdapter(Context context,
                        int resource,
@@ -65,9 +69,9 @@ public class MenuAdapter extends ArrayAdapter implements View.OnClickListener{
         }
 
         final ImageView ivFoodImg = rowView.findViewById(R.id.ivFoodImg);
-        TextView tvFoodName = rowView.findViewById(R.id.tvFoodName);
+        final TextView tvFoodName = rowView.findViewById(R.id.tvFoodName);
         TextView tvPrice = rowView.findViewById(R.id.tvPrice);
-        Button btnAddToCart = rowView.findViewById(R.id.btnAddToCart);
+        final Button btnAddToCart = rowView.findViewById(R.id.btnAddToCart);
 
         currentMenu = menuList.get(position);
 
@@ -84,8 +88,20 @@ public class MenuAdapter extends ArrayAdapter implements View.OnClickListener{
                 .transform(ImageTransformation.getTransformation(ivFoodImg))
                 .into(ivFoodImg);
 
-        btnAddToCart.setOnClickListener(this);
+        btnAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String urlCheckODExist = "https://16004118.000webhostapp.com/getOrderDetailByIds.php?orderId="
+                        + CurrentOrder.currentOrderId + "&menuId=" + menuList.get(position).getMenuId();
+                menuPosition = position;
+                HttpRequest requestCheckODExist = new HttpRequest(urlCheckODExist);
 
+                requestCheckODExist.setOnHttpResponseListener(mHttpResponseListenerCheckODExist);
+                requestCheckODExist.setMethod("GET");
+
+                requestCheckODExist.execute();
+            }
+        });
         return rowView;
     }
 
@@ -103,7 +119,7 @@ public class MenuAdapter extends ArrayAdapter implements View.OnClickListener{
 
                             //create new orderDetail record
                             String urlCreateRecord = "https://16004118.000webhostapp.com/createOrderDetail.php?orderId="
-                                    + CurrentOrder.currentOrderId + "&menuId=" + currentMenu.getMenuId();
+                                    + CurrentOrder.currentOrderId + "&menuId=" + menuList.get(menuPosition).getMenuId();
 
                             HttpRequest requestCreateRecord = new HttpRequest(urlCreateRecord);
 
@@ -149,6 +165,9 @@ public class MenuAdapter extends ArrayAdapter implements View.OnClickListener{
                         if (jsonObj.getBoolean("success")){
                            //new orderDetail created successfully
                             Log.e(TAG, "createOrderDetail: Successful" );
+                            if(getContext() instanceof OrderActivity){
+                                ((OrderActivity)getContext()).updateOrderUI(Integer.parseInt(CurrentOrder.currentOrderId));
+                            }
                         }else{
                             //Failed to create orderDetail
                             orderDetailFailed();
@@ -177,7 +196,7 @@ public class MenuAdapter extends ArrayAdapter implements View.OnClickListener{
                             Log.e(TAG, "createOrderDetail: Successful" );
 
                             if(getContext() instanceof OrderActivity){
-//                                ((OrderActivity)getContext()).updateOrderUI();
+                                ((OrderActivity)getContext()).updateOrderUI(Integer.parseInt(CurrentOrder.currentOrderId));
                             }
                         }else{
                             //Failed to create orderDetail
@@ -194,19 +213,5 @@ public class MenuAdapter extends ArrayAdapter implements View.OnClickListener{
     private void orderDetailFailed() {
         Log.e(TAG, "createOrderDetail: Failed");
         Toast.makeText(getContext(), "Failed to continue your order", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onClick(View v) {
-
-        String urlCheckODExist = "https://16004118.000webhostapp.com/getOrderDetailByIds.php?orderId="
-                + CurrentOrder.currentOrderId + "&menuId=" + currentMenu.getMenuId();
-
-        HttpRequest requestCheckODExist = new HttpRequest(urlCheckODExist);
-
-        requestCheckODExist.setOnHttpResponseListener(mHttpResponseListenerCheckODExist);
-        requestCheckODExist.setMethod("GET");
-
-        requestCheckODExist.execute();
     }
 }

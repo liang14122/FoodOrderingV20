@@ -50,4 +50,12 @@
         <item>Others</item>
     </string-array>
     <string name="title_activity_overview">OverviewActivity</string>
+    <string name="no_item_yet">No Item Yet</string>
+    <string name="total_0">Total $0</string>
+    <string name="food_name">Food Name</string>
+    <string name="food_description">Food Description</string>
+    <string name="confirm_your_order">Confirm Your Order</string>
+    <string name="detail_confirm">Detail Confirm</string>
+    <string name="price_confirm">Price Confirm</string>
+    <string name="food_confirm">Food Confirm</string>
 </resources>

@@ -48,7 +48,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="@+id/tvTotalPrice_left_guideline"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:text="No Item Yet"
+            android:text="@string/no_item_yet"
             android:layout_margin="8dp"/>
 
         <TextView
@@ -59,7 +59,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_margin="8dp"
-            android:text="Total $0"/>
+            android:text="@string/total_0"/>
 
         <com.qmuiteam.qmui.alpha.QMUIAlphaButton
             android:id="@+id/btnConfirmOrder"
@@ -71,7 +71,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:qmui_borderColor="@color/colorButton"
-            android:theme="@style/QMUI"/>
+            android:theme="@style/QMUI"
+            tools:ignore="HardcodedText" />
 
     </android.support.constraint.ConstraintLayout>
 
