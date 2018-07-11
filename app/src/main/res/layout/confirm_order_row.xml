@@ -10,20 +10,22 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/tvDetailConfirm"
         android:id="@+id/tvFoodConfirm"
         android:text="@string/food_confirm"
-        android:layout_margin="8dp"/>
+        android:padding="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/tvPriceConfirm"
-        app:layout_constraintRight_toLeftOf="@+id/tvFoodConfirm"
+        app:layout_constraintLeft_toRightOf="@+id/tvFoodConfirm"
+        app:layout_constraintRight_toLeftOf="@+id/tvPriceConfirm"
         android:id="@+id/tvDetailConfirm"
         android:text="@string/detail_confirm"
-        android:layout_margin="8dp"/>
+        android:textSize="18sp"
+        android:padding="20dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -33,6 +35,7 @@
         app:layout_constraintLeft_toRightOf="@+id/tvDetailConfirm"
         android:id="@+id/tvPriceConfirm"
         android:text="@string/price_confirm"
-        android:layout_margin="8dp"/>
+        android:textSize="20sp"
+        android:padding="20dp"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -90,12 +90,18 @@ public class OrderActivity extends AppCompatActivity {
 
                 if (orderDetailArr.length()>0){
                     Intent intent = new Intent(OrderActivity.this, ConfirmActivity.class);
-                    //pass arrayList alMenu
+
                     intent.putExtra("alMenu", alMenu);
+
                     //pass orderDetail
-                    Bundle bundle = new Bundle();
-                    bundle.putString("orderDetail", orderDetailArr.toString());
-                    intent.putExtras(bundle);
+                    Bundle bundleOrderDetail = new Bundle();
+                    bundleOrderDetail.putString("orderDetail", orderDetailArr.toString());
+
+                    //pass arrayList alMenu
+                    Bundle bundleAlMenu = new Bundle();
+                    bundleAlMenu.putSerializable("alMenu", alMenu);
+                    intent.putExtra("bundleAlMenu",bundleAlMenu);
+                    intent.putExtra("bundleOrderDetail",bundleOrderDetail);
                     startActivity(intent);
                 }else{
                     Toast.makeText(OrderActivity.this, "Please select at least one item", Toast.LENGTH_LONG).show();

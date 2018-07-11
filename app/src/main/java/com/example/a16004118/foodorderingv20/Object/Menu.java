@@ -1,7 +1,9 @@
 package com.example.a16004118.foodorderingv20.Object;
 
 
-public class Menu {
+import java.io.Serializable;
+
+public class Menu implements Serializable{
     private int menuId;
     private int categoryId;
     private String foodName;
