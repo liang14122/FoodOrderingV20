@@ -3,6 +3,7 @@
     package="com.example.a16004118.foodorderingv20">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SEND_SMS"/>
 
     <application
         android:allowBackup="true"
@@ -11,16 +12,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.AuthActivity"></activity>
-        <activity android:name=".Activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".Activity.AuthActivity" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity android:name=".Activity.MainActivity">
+
         </activity>
         <activity android:name=".Activity.OrderActivity" />
-        <activity android:name=".Activity.ConfirmActivity"></activity>
+        <activity android:name=".Activity.ConfirmActivity" />
+        <activity android:name=".Activity.FinalActivity"></activity>
     </application>
 
 </manifest>

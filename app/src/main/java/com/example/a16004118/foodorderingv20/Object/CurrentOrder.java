@@ -1,4 +1,4 @@
-package com.example.a16004118.foodorderingv20;
+package com.example.a16004118.foodorderingv20.Object;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

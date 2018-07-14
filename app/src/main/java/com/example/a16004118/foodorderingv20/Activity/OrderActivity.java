@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a16004118.foodorderingv20.Adapter.MenuAdapter;
-import com.example.a16004118.foodorderingv20.CurrentOrder;
+import com.example.a16004118.foodorderingv20.Object.CurrentOrder;
 import com.example.a16004118.foodorderingv20.HttpRequest;
 import com.example.a16004118.foodorderingv20.ImageTransformation;
 import com.example.a16004118.foodorderingv20.Object.Menu;

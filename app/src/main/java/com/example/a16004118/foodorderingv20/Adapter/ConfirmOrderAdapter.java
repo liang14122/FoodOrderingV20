@@ -3,22 +3,14 @@ package com.example.a16004118.foodorderingv20.Adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.a16004118.foodorderingv20.CurrentOrder;
-import com.example.a16004118.foodorderingv20.HttpRequest;
-import com.example.a16004118.foodorderingv20.ImageTransformation;
 import com.example.a16004118.foodorderingv20.Object.ConfirmOrder;
-import com.example.a16004118.foodorderingv20.Object.Menu;
 import com.example.a16004118.foodorderingv20.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 

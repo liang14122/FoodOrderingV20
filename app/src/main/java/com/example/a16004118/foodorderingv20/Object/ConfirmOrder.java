@@ -1,6 +1,8 @@
 package com.example.a16004118.foodorderingv20.Object;
 
-public class ConfirmOrder {
+import java.io.Serializable;
+
+public class ConfirmOrder implements Serializable{
 
     private int menuId;
     private String name;

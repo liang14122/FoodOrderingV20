@@ -2,10 +2,6 @@ package com.example.a16004118.foodorderingv20.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.support.v7.app.AlertDialog;
-import android.text.AlteredCharSequence;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,21 +12,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.a16004118.foodorderingv20.Activity.AuthActivity;
-import com.example.a16004118.foodorderingv20.Activity.MainActivity;
 import com.example.a16004118.foodorderingv20.Activity.OrderActivity;
-import com.example.a16004118.foodorderingv20.CurrentOrder;
+import com.example.a16004118.foodorderingv20.Object.CurrentOrder;
 import com.example.a16004118.foodorderingv20.HttpRequest;
 import com.example.a16004118.foodorderingv20.ImageTransformation;
 import com.example.a16004118.foodorderingv20.Object.Menu;
-import com.example.a16004118.foodorderingv20.Object.Order;
 import com.example.a16004118.foodorderingv20.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
