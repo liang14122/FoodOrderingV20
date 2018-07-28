@@ -13,7 +13,7 @@
         android:id="@+id/tvFoodConfirm"
         android:text="@string/food_confirm"
         android:padding="20dp"
-        android:textSize="20sp"
+        android:textSize="14sp"
         android:textStyle="bold"/>
 
     <TextView
