@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth= FirebaseAuth.getInstance();
 
         //get most sellers
-        String url = "https://16004118.000webhostapp.com/getMenuMostSellers.php";
+        String url = "https://16004118.000webhostapp.com/FooderOrderV20/getMenuMostSellers.php";
 
         HttpRequest request = new HttpRequest(url);
 

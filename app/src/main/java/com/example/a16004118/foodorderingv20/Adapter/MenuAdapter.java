@@ -80,7 +80,7 @@ public class MenuAdapter extends ArrayAdapter{
         btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String urlCheckODExist = "https://16004118.000webhostapp.com/getOrderDetailByIds.php?orderId="
+                String urlCheckODExist = "https://16004118.000webhostapp.com/FooderOrderV20/getOrderDetailByIds.php?orderId="
                         + CurrentOrder.currentOrderId + "&menuId=" + menuList.get(position).getMenuId();
                 menuPosition = position;
                 HttpRequest requestCheckODExist = new HttpRequest(urlCheckODExist);
@@ -107,7 +107,7 @@ public class MenuAdapter extends ArrayAdapter{
                         if (!jsonObj.getBoolean("success")) {
 
                             //create new orderDetail record
-                            String urlCreateRecord = "https://16004118.000webhostapp.com/createOrderDetail.php?orderId="
+                            String urlCreateRecord = "https://16004118.000webhostapp.com/FooderOrderV20/createOrderDetail.php?orderId="
                                     + CurrentOrder.currentOrderId + "&menuId=" + menuList.get(menuPosition).getMenuId();
 
                             HttpRequest requestCreateRecord = new HttpRequest(urlCreateRecord);
@@ -122,7 +122,7 @@ public class MenuAdapter extends ArrayAdapter{
                             int quantity = jsonObj.getInt("quantity") + 1;
                             int orderDetailId = jsonObj.getInt("orderDetailId");
                             //update quantity
-                            String urlUpdateQuantity = "https://16004118.000webhostapp.com/updateOrderDetailById.php?orderDetailId="
+                            String urlUpdateQuantity = "https://16004118.000webhostapp.com/FooderOrderV20/updateOrderDetailById.php?orderDetailId="
                                     + orderDetailId + "&quantity=" + quantity;
 
                             HttpRequest requestUpdateQuantity = new HttpRequest(urlUpdateQuantity);

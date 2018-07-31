@@ -65,7 +65,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/phone_number"
                 android:inputType="text"
-                tools:ignore="TextFields" />
+                tools:ignore="TextFields"
+                android:text="@string/_65"/>
 
         </android.support.design.widget.TextInputLayout>
 

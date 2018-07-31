@@ -58,7 +58,7 @@ public class OrderActivity extends AppCompatActivity {
 
         String fbId = currentUser.getUid();
 
-        String urlGetCurrentUSer = "https://16004118.000webhostapp.com/getUserByUid.php?fbId=" + fbId;
+        String urlGetCurrentUSer = "https://16004118.000webhostapp.com/FooderOrderV20/getUserByUid.php?fbId=" + fbId;
 
         HttpRequest requestGetCurrentUSer = new HttpRequest(urlGetCurrentUSer);
 
@@ -75,7 +75,7 @@ public class OrderActivity extends AppCompatActivity {
         ma = new MenuAdapter(OrderActivity.this, R.layout.menu_row, alMenu);
         lvMenu.setAdapter(ma);
 
-        String urlGetMenu = "https://16004118.000webhostapp.com/getMenu.php";
+        String urlGetMenu = "https://16004118.000webhostapp.com/FooderOrderV20/getMenu.php";
 
         HttpRequest requestGetMenu = new HttpRequest(urlGetMenu);
 
@@ -155,7 +155,7 @@ public class OrderActivity extends AppCompatActivity {
 
     public void updateOrderUI(int orderId){
 
-        String urlGetOrderDetail = "https://16004118.000webhostapp.com/getOrderDetailById.php?orderId=" + orderId;
+        String urlGetOrderDetail = "https://16004118.000webhostapp.com/FooderOrderV20/getOrderDetailById.php?orderId=" + orderId;
 
         HttpRequest requestGetOrderDetail = new HttpRequest(urlGetOrderDetail);
 
@@ -220,7 +220,7 @@ public class OrderActivity extends AppCompatActivity {
 
                             String userId = jsonObj.getString("userId");
 
-                            String urlCreateOrder = "https://16004118.000webhostapp.com/createOrder.php?userId=" + userId;
+                            String urlCreateOrder = "https://16004118.000webhostapp.com/FooderOrderV20/createOrder.php?userId=" + userId;
 
                             HttpRequest requestCreateUser = new HttpRequest(urlCreateOrder);
 

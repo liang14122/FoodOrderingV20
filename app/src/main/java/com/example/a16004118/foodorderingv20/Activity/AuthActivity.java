@@ -138,7 +138,7 @@ public class AuthActivity extends AppCompatActivity {
 
                             String uid = user.getUid();
 
-                            String url = "https://16004118.000webhostapp.com/getUserByUid.php?fbId=" + uid;
+                            String url = "https://16004118.000webhostapp.com/FooderOrderV20/getUserByUid.php?fbId=" + uid;
 
                             HttpRequest request = new HttpRequest(url);
 
@@ -185,7 +185,7 @@ public class AuthActivity extends AppCompatActivity {
 
                                 String uid = mAuth.getCurrentUser().getUid();
 
-                                String url = "https://16004118.000webhostapp.com/createUser.php?fbId=" + uid;
+                                String url = "https://16004118.000webhostapp.com/FooderOrderV20/createUser.php?fbId=" + uid;
 
                                 HttpRequest request = new HttpRequest(url);
 

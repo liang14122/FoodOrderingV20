@@ -4,7 +4,7 @@
     <string name="send_verification_code">Send Verification Code</string>
     <string name="verification_code">Verification Code</string>
     <string name="todo">TODO</string>
-    <string name="phone_number">Phone Number with Country Code</string>
+    <string name="phone_number">Phone Number</string>
 
     <string name="register">Register</string>
 
@@ -59,4 +59,5 @@
     <string name="price_confirm">Price Confirm</string>
     <string name="food_confirm">Food Confirm</string>
     <string name="start_new_order">Start New Order</string>
+    <string name="_65">+65</string>
 </resources>
